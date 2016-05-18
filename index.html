@@ -38,7 +38,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 
 
 
-<link href="data:text/plain; charset=utf-8,body%20%7B%0A%20%20%20background%2Dcolor%3A%20white%3B%0A%7D%0A%0Abody%2C%20td%20%7B%0A%20%20%20font%2Dfamily%3A%20sans%2Dserif%3B%0A%20%20%20font%2Dsize%3A%2012px%3B%0A%20%20%20margin%3A%208px%3B%0A%7D%0A%0Att%2C%20code%2C%20pre%20%7B%0A%20%20%20font%2Dfamily%3A%20%27DejaVu%20Sans%20Mono%27%2C%20%27Droid%20Sans%20Mono%27%2C%20%27Lucida%20Console%27%2C%20Consolas%2C%20Monaco%2C%20monospace%3B%0A%7D%0A%0Ah1%20%7B%20%0A%20%20%20font%2Dsize%3A2%2E2em%3B%20%0A%7D%0A%0Ah2%20%7B%20%0A%20%20%20font%2Dsize%3A1%2E8em%3B%20%0A%7D%0A%0Ah3%20%7B%20%0A%20%20%20font%2Dsize%3A1%2E4em%3B%20%0A%7D%0A%0Ah4%20%7B%20%0A%20%20%20font%2Dsize%3A1%2E0em%3B%20%0A%7D%0A%0Ah5%20%7B%20%0A%20%20%20font%2Dsize%3A0%2E9em%3B%20%0A%7D%0A%0Ah6%20%7B%20%0A%20%20%20font%2Dsize%3A0%2E8em%3B%20%0A%7D%0A%0Aa%3Avisited%20%7B%0A%20%20%20color%3A%20rgb%2850%25%2C%200%25%2C%2050%25%29%3B%0A%7D%0A%0Apre%20%7B%09%0A%20%20%20margin%2Dtop%3A%200%3B%0A%20%20%20max%2Dwidth%3A%2095%25%3B%0A%20%20%20border%3A%201px%20solid%20%23ccc%3B%0A%20%20%20white%2Dspace%3A%20pre%2Dwrap%3B%0A%7D%0A%0Apre%20code%20%7B%0A%20%20%20display%3A%20block%3B%20padding%3A%200%2E5em%3B%0A%7D%0A%0Acode%2Er%2C%20code%2Ecpp%20%7B%0A%20%20%20background%2Dcolor%3A%20%23F8F8F8%3B%0A%7D%0A%0Atable%2C%20td%2C%20th%20%7B%0A%20%20%20%20border%3A%20none%3B%0A%20%20%20%20padding%2Dright%3A%2010px%3B%0A%20%20%20%20padding%2Dleft%3A%2010px%3B%0A%20%20%20%20overflow%3A%20hidden%3B%0A%20%20%20%20page%2Dbreak%2Dafter%3Aauto%0A%7D%0A%0Atr%2C%20td%20%7B%0A%20%20%20page%2Dbreak%2Dinside%3Aavoid%3B%20%0A%20%20%20page%2Dbreak%2Dafter%3Aauto%0A%7D%0A%0Athead%20%7B%0A%20%20%20display%3Atable%2Dheader%2Dgroup%0A%7D%0A%0Atable%2Etirc%5Ftable%20%7B%0A%20%20%20%20line%2Dheight%3A%20150%25%3B%0A%20%20%20%20margin%2Dleft%3Aauto%3B%20%0A%20%20%20%20margin%2Dright%3Aauto%3B%0A%7D%0A%0Atable%2Etirc%5Ftable%20tbody%20td%7B%0A%20%20%20%20line%2Dheight%3A%20100%25%3B%0A%20%20%20%20padding%2Dtop%3A%206px%3B%0A%20%20%20%20padding%2Dbottom%3A%206px%3B%0A%7D%0A%0Atable%2Etirc%5Ftable%20tr%2Ehigh%5Frow%7B%0A%20%20%20%20background%2Dcolor%3A%20%23DBE5F1%3B%0A%7D%0A%0Atable%2Etirc%5Ftable%20tr%3Ahover%20%7B%0A%20%20background%2Dcolor%3A%20%23ffff99%3B%0A%7D%0A%0Atable%2Etirc%5Ftable%20th%20%7B%0A%20%20%20%20vertical%2Dalign%3A%20bottom%3B%0A%7D%0A%0Ablockquote%20%7B%0A%20%20%20color%3A%23666666%3B%0A%20%20%20margin%3A0%3B%0A%20%20%20padding%2Dleft%3A%201em%3B%0A%20%20%20border%2Dleft%3A%200%2E5em%20%23EEE%20solid%3B%0A%7D%0A%0Ahr%20%7B%0A%20%20%20height%3A%200px%3B%0A%20%20%20border%2Dbottom%3A%20none%3B%0A%20%20%20border%2Dtop%2Dwidth%3A%20thin%3B%0A%20%20%20border%2Dtop%2Dstyle%3A%20dotted%3B%0A%20%20%20border%2Dtop%2Dcolor%3A%20%23999999%3B%0A%7D%0A%0A%40media%20print%20%7B%0A%20%20%20%2A%20%7B%20%0A%20%20%20%20%20%20background%3A%20transparent%20%21important%3B%20%0A%20%20%20%20%20%20color%3A%20black%20%21important%3B%20%0A%20%20%20%20%20%20filter%3Anone%20%21important%3B%20%0A%20%20%20%20%20%20%2Dms%2Dfilter%3A%20none%20%21important%3B%20%0A%20%20%20%7D%0A%0A%20%20%20body%20%7B%20%0A%20%20%20%20%20%20font%2Dsize%3A12pt%3B%20%0A%20%20%20%20%20%20max%2Dwidth%3A100%25%3B%20%0A%20%20%20%7D%0A%20%20%20%20%20%20%20%0A%20%20%20a%2C%20a%3Avisited%20%7B%20%0A%20%20%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%0A%20%20%20%7D%0A%0A%20%20%20hr%20%7B%20%0A%20%20%20%20%20%20visibility%3A%20hidden%3B%0A%20%20%20%20%20%20page%2Dbreak%2Dbefore%3A%20always%3B%0A%20%20%20%7D%0A%0A%20%20%20pre%2C%20blockquote%20%7B%20%0A%20%20%20%20%20%20padding%2Dright%3A%201em%3B%20%0A%20%20%20%20%20%20page%2Dbreak%2Dinside%3A%20avoid%3B%20%0A%20%20%20%7D%0A%0A%20%20%20tr%2C%20img%20%7B%20%0A%20%20%20%20%20%20page%2Dbreak%2Dinside%3A%20avoid%3B%20%0A%20%20%20%7D%0A%0A%20%20%20img%20%7B%20%0A%20%20%20%20%20%20max%2Dwidth%3A%20100%25%20%21important%3B%20%0A%20%20%20%7D%0A%0A%20%20%20%40page%20%3Aleft%20%7B%20%0A%20%20%20%20%20%20margin%3A%2015mm%2020mm%2015mm%2010mm%3B%20%0A%20%20%20%7D%0A%20%20%20%20%20%0A%20%20%20%40page%20%3Aright%20%7B%20%0A%20%20%20%20%20%20margin%3A%2015mm%2010mm%2015mm%2020mm%3B%20%0A%20%20%20%7D%0A%0A%20%20%20p%2C%20h2%2C%20h3%20%7B%20%0A%20%20%20%20%20%20orphans%3A%203%3B%20widows%3A%203%3B%20%0A%20%20%20%7D%0A%0A%20%20%20h2%2C%20h3%20%7B%20%0A%20%20%20%20%20%20page%2Dbreak%2Dafter%3A%20avoid%3B%20%0A%20%20%20%7D%0A%7D%0A" rel="stylesheet" type="text/css" />
+<link href="data:text/plain; charset=utf-8,body%20%7B%0A%20%20%20background%2Dcolor%3A%20white%3B%0A%7D%0A%0Abody%2C%20td%20%7B%0A%20%20%20font%2Dfamily%3A%20sans%2Dserif%3B%0A%20%20%20font%2Dsize%3A%2010pt%3B%0A%20%20%20margin%3A%208px%3B%0A%7D%0A%0Att%2C%20code%2C%20pre%20%7B%0A%20%20%20font%2Dfamily%3A%20%27DejaVu%20Sans%20Mono%27%2C%20%27Droid%20Sans%20Mono%27%2C%20%27Lucida%20Console%27%2C%20Consolas%2C%20Monaco%2C%20monospace%3B%0A%7D%0A%0Ah1%20%7B%20%0A%20%20%20font%2Dsize%3A18pt%3B%0A%20%20%20font%2Dweight%3Abold%3B%0A%7D%0A%0Ah2%20%7B%20%0A%20%20%20font%2Dsize%3A15pt%3B%20%0A%20%20%20font%2Dweight%3Abold%3B%0A%7D%0A%0Ah3%20%7B%20%0A%20%20%20font%2Dsize%3A12pt%3B%20%0A%20%20%20font%2Dweight%3Abold%3B%0A%7D%0A%0Ah4%20%7B%20%0A%20%20%20font%2Dsize%3A10pt%3B%0A%20%20%20font%2Dweight%3Abold%3B%0A%7D%0A%0Ah5%20%7B%20%0A%20%20%20font%2Dsize%3A10pt%3B%0A%20%20%20font%2Dstyle%3A%20italic%3B%0A%7D%0A%0Ah6%20%7B%20%0A%20%20%20font%2Dsize%3A10pt%3B%0A%20%20%20font%2Dweight%3Abold%3B%0A%20%20%20color%3A%20%234A4837%3B%0A%7D%0A%0Aa%3Avisited%20%7B%0A%20%20%20color%3A%20rgb%2850%25%2C%200%25%2C%2050%25%29%3B%0A%7D%0A%0Apre%20%7B%09%0A%20%20%20margin%2Dtop%3A%200%3B%0A%20%20%20max%2Dwidth%3A%2095%25%3B%0A%20%20%20border%3A%201px%20solid%20%23ccc%3B%0A%20%20%20white%2Dspace%3A%20pre%2Dwrap%3B%0A%7D%0A%0Apre%20code%20%7B%0A%20%20%20display%3A%20block%3B%20padding%3A%200%2E5em%3B%0A%7D%0A%0Acode%2Er%2C%20code%2Ecpp%20%7B%0A%20%20%20background%2Dcolor%3A%20%23F8F8F8%3B%0A%7D%0A%0Atable%2C%20td%2C%20th%20%7B%0A%20%20%20%20border%3A%20none%3B%0A%20%20%20%20padding%2Dright%3A%2010px%3B%0A%20%20%20%20padding%2Dleft%3A%2010px%3B%0A%20%20%20%20overflow%3A%20hidden%3B%0A%20%20%20%20page%2Dbreak%2Dafter%3Aauto%0A%7D%0A%0Atr%2C%20td%20%7B%0A%20%20%20page%2Dbreak%2Dinside%3Aavoid%3B%20%0A%20%20%20page%2Dbreak%2Dafter%3Aauto%0A%7D%0A%0Athead%20%7B%0A%20%20%20display%3Atable%2Dheader%2Dgroup%0A%7D%0A%0Atable%2Etirc%5Ftable%20%7B%0A%20%20%20%20line%2Dheight%3A%20150%25%3B%0A%20%20%20%20margin%2Dleft%3Aauto%3B%20%0A%20%20%20%20margin%2Dright%3Aauto%3B%0A%7D%0A%0Atable%2Etirc%5Ftable%20tbody%20td%7B%0A%20%20%20%20line%2Dheight%3A%20100%25%3B%0A%20%20%20%20padding%2Dtop%3A%206px%3B%0A%20%20%20%20padding%2Dbottom%3A%206px%3B%0A%7D%0A%0Atable%2Etirc%5Ftable%20tr%2Ehigh%5Frow%7B%0A%20%20%20%20background%2Dcolor%3A%20%23DBE5F1%3B%0A%7D%0A%0Atable%2Etirc%5Ftable%20tr%3Ahover%20%7B%0A%20%20background%2Dcolor%3A%20%23ffff99%3B%0A%7D%0A%0Atable%2Etirc%5Ftable%20th%20%7B%0A%20%20%20%20vertical%2Dalign%3A%20bottom%3B%0A%7D%0A%0Ablockquote%20%7B%0A%20%20%20color%3A%23666666%3B%0A%20%20%20margin%3A0%3B%0A%20%20%20padding%2Dleft%3A%201em%3B%0A%20%20%20border%2Dleft%3A%200%2E5em%20%23EEE%20solid%3B%0A%7D%0A%0Ahr%20%7B%0A%20%20%20height%3A%200px%3B%0A%20%20%20border%2Dbottom%3A%20none%3B%0A%20%20%20border%2Dtop%2Dwidth%3A%20thin%3B%0A%20%20%20border%2Dtop%2Dstyle%3A%20dotted%3B%0A%20%20%20border%2Dtop%2Dcolor%3A%20%23999999%3B%0A%7D%0A%0A%40media%20print%20%7B%0A%20%20%20%2A%20%7B%20%0A%20%20%20%20%20%20background%3A%20transparent%20%21important%3B%20%0A%20%20%20%20%20%20color%3A%20black%20%21important%3B%20%0A%20%20%20%20%20%20filter%3Anone%20%21important%3B%20%0A%20%20%20%20%20%20%2Dms%2Dfilter%3A%20none%20%21important%3B%20%0A%20%20%20%7D%0A%0A%20%20%20body%20%7B%20%0A%20%20%20%20%20%20font%2Dsize%3A12pt%3B%20%0A%20%20%20%20%20%20max%2Dwidth%3A100%25%3B%20%0A%20%20%20%7D%0A%20%20%20%20%20%20%20%0A%20%20%20a%2C%20a%3Avisited%20%7B%20%0A%20%20%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%0A%20%20%20%7D%0A%0A%20%20%20hr%20%7B%20%0A%20%20%20%20%20%20visibility%3A%20hidden%3B%0A%20%20%20%20%20%20page%2Dbreak%2Dbefore%3A%20always%3B%0A%20%20%20%7D%0A%0A%20%20%20pre%2C%20blockquote%20%7B%20%0A%20%20%20%20%20%20padding%2Dright%3A%201em%3B%20%0A%20%20%20%20%20%20page%2Dbreak%2Dinside%3A%20avoid%3B%20%0A%20%20%20%7D%0A%0A%20%20%20tr%2C%20img%20%7B%20%0A%20%20%20%20%20%20page%2Dbreak%2Dinside%3A%20avoid%3B%20%0A%20%20%20%7D%0A%0A%20%20%20img%20%7B%20%0A%20%20%20%20%20%20max%2Dwidth%3A%20100%25%20%21important%3B%20%0A%20%20%20%7D%0A%0A%20%20%20%40page%20%3Aleft%20%7B%20%0A%20%20%20%20%20%20margin%3A%2015mm%2020mm%2015mm%2010mm%3B%20%0A%20%20%20%7D%0A%20%20%20%20%20%0A%20%20%20%40page%20%3Aright%20%7B%20%0A%20%20%20%20%20%20margin%3A%2015mm%2010mm%2015mm%2020mm%3B%20%0A%20%20%20%7D%0A%0A%20%20%20p%2C%20h2%2C%20h3%20%7B%20%0A%20%20%20%20%20%20orphans%3A%203%3B%20widows%3A%203%3B%20%0A%20%20%20%7D%0A%0A%20%20%20h2%2C%20h3%20%7B%20%0A%20%20%20%20%20%20page%2Dbreak%2Dafter%3A%20avoid%3B%20%0A%20%20%20%7D%0A%7D%0A" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -116,6 +116,7 @@ $(document).ready(function () {
 <ul>
 <li><a href="#about-me">About Me</a></li>
 <li><a href="#quick-look">Quick Look</a><ul>
+<li><a href="#bootstrapping-joint-model">Bootstrapping Joint Model</a></li>
 <li><a href="#plotting-predicted-survival">Plotting Predicted Survival</a></li>
 </ul></li>
 </ul>
@@ -129,6 +130,157 @@ $(document).ready(function () {
 </div>
 <div id="quick-look" class="section level2">
 <h2>Quick Look</h2>
+<div id="bootstrapping-joint-model" class="section level3">
+<h3>Bootstrapping Joint Model</h3>
+<p>Fitting a linear mixed effects model with vcp as the outcome and time prior to procedure as the only covariate gives useful information about individual estimate for vcp at time of procedure and average change in vcp per month prior to procedure. The random intercept and slope are of most interest here. These random effects can then be used as covariates in a survival post procedure model. This has the benefit of filling in gaps for vcp prior to procedure and also adding in information about the rate of change prior to procedure. These models can be fit separately but then the joint error needs to be estimated. The method shown below uses bootstrapping to calculate non-parametric errors for the effects of interest.</p>
+<pre class="r"><code>jm_fxn &lt;- function(data, b, formula, covs=NULL, long_ds, var){
+  d = data[b, ]
+  get_coefs &lt;- function(){
+    d$new_id &lt;- sprintf(&quot;%0*d&quot;, nchar(nrow(d)), 1:nrow(d))
+    ## the long dataset needs to be restricted to subjects bootstrapped. Since the IDs can repeat 
+    tmp_ds &lt;- d %&gt;% select(new_id, subject_id) %&gt;% left_join(long_ds, by=&quot;subject_id&quot;) %&gt;% select(-subject_id)
+
+    ## mixed model is used to estimate an intercept and slope to use in the final model
+    fm_lms &lt;- stats::formula(sprintf(&quot;%s ~ months_bp&quot;, var))
+    lms &lt;- lme(fm_lms, random=~months_bp|new_id, correlation = corAR1(), data=tmp_ds)
+    
+    ## this extract estimates
+    ## the fixed effect is added to the random effect for each subject to estimate for each subject
+    lms_summ &lt;- summary(lms)
+    preds_df &lt;- data_frame(new_id=rownames(lms_summ$coefficients$random$new_id),  
+                           int = lms_summ$coefficients$random$new_id[,&quot;(Intercept)&quot;] +
+                             lms_summ$coefficients$fixed[&quot;(Intercept)&quot;],
+                           slope=lms_summ$coefficients$random$new_id[,&quot;months_bp&quot;] +
+                             lms_summ$coefficients$fixed[&quot;months_bp&quot;])
+    
+    ## the string &quot;int&quot; and &quot;slope&quot; should not be in covs
+    surv_ds &lt;- d[c(&quot;new_id&quot;, &quot;surv_months&quot;, &quot;event&quot;, covs)] %&gt;% left_join(preds_df, by=&quot;new_id&quot;)
+    
+    ## the cox proportional hazard model includes the intercept and slope and any given covariates (cov)
+    sf &lt;- stats::formula(sprintf(&quot;Surv(surv_months, event) ~ int + %s&quot;, paste0(&quot;`&quot;, &quot;slope&quot;, &quot;`&quot;, collapse=&quot; + &quot;)))
+    cph &lt;- coxph(sf, data=surv_ds)
+    scph &lt;- summary(cph)
+    
+    ## the bootstrapped statistic is the estimate
+    outv &lt;- c(scph$coefficients[c(&quot;int&quot;, &quot;slope&quot;), &quot;exp(coef)&quot;])
+    names(outv) &lt;- paste(var, c(&quot;int_unadj&quot;, &quot;slope_unadj&quot;), sep=&quot;_&quot;)
+    outv
+  }
+  tryCatch(get_coefs(), error=function(e) NA)
+}
+
+bt_cox_fxn &lt;- function(x, conf=0.95){
+  df_out &lt;- data.frame(HR=x$t0)
+  df_out$vnames = rownames(df_out)
+  
+  ## standard Error
+  df_out$se &lt;- apply(x$t, 2, sd, na.rm=T)
+  
+  ## P value
+  df_out$p &lt;- sapply(1:ncol(x$t), function(i){
+    sum(sign(x$t0[i])*x$t[,i] &gt; sign(x$t0[i]), na.rm=T)/sum(!is.na(x$t[,i]))
+  })
+  
+  ## Confidence interval
+  df_out[c(&quot;Lower 95%&quot;, &quot;Upper 95%&quot;)] &lt;- t(apply(x$t, 2, function(y){
+    quantile(y, c((1-conf)/2, 1-(1-conf)/2), na.rm=T)
+  }))
+  df_out
+}
+
+### Example Code ---
+## number of bootstraps (low for example. 2000 used for analysis)
+bnum=1000
+
+## creating fake data 
+subs &lt;- sprintf(&quot;%03d&quot;, 1:100) ## subject ID
+time_pr &lt;- 1:10 ## time before procedure
+
+## vcp_ds is a generated dataset that shows the trajectory of vcp prior to procedure
+vcp_ds &lt;- expand.grid(subject_id=subs, months_bp=time_pr, stringsAsFactors=F) %&gt;% 
+  group_by(subject_id) %&gt;% arrange(-months_bp) %&gt;% 
+  mutate(vcp = runif(1, 80, 100) - seq(runif(1, 0, 10), runif(1, 20, 60), length.out=n()) + runif(n(), -5, 5))
+
+## s_ds is a generated dataset that shows the survival post procedure
+s_ds &lt;- vcp_ds %&gt;% arrange(subject_id, months_bp) %&gt;% filter(row_number() == 1) %&gt;% 
+  mutate(Tlat=-log(runif(n=n())) / (0.01 * exp(rbinom(n(), 1, 0.5)*-0.6)),
+         c=rexp(n(), 0.001), 
+         surv_months = pmin(Tlat, c),
+         event=as.numeric(Tlat &lt;= c))
+
+## running boot function
+bt &lt;- boot(data=s_ds, statistic=jm_fxn, R=bnum, long_ds=vcp_ds, var=&quot;vcp&quot;)</code></pre>
+<p>Resulting effects and confidence intervals below</p>
+<style type="text/css">
+
+</style>
+<table class="tirc_table" style="border-collapse: collapse;">
+<thead class="tirc_head">
+<tr>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
+ 
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+HR
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+se
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+p
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Lower 95%
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Upper 95%
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">
+VCP Intercept
+</td>
+<td style="text-align: left;">
+1.01
+</td>
+<td style="text-align: left;">
+0.02
+</td>
+<td style="text-align: left;">
+0.735
+</td>
+<td style="text-align: left;">
+0.97
+</td>
+<td style="text-align: left;">
+1.053
+</td>
+</tr>
+<tr>
+<td style="border-bottom: 2px solid grey; text-align: left;">
+VCP Slope
+</td>
+<td style="border-bottom: 2px solid grey; text-align: left;">
+1.154
+</td>
+<td style="border-bottom: 2px solid grey; text-align: left;">
+0.212
+</td>
+<td style="border-bottom: 2px solid grey; text-align: left;">
+0.805
+</td>
+<td style="border-bottom: 2px solid grey; text-align: left;">
+0.798
+</td>
+<td style="border-bottom: 2px solid grey; text-align: left;">
+1.638
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 <div id="plotting-predicted-survival" class="section level3">
 <h3>Plotting Predicted Survival</h3>
 <p>A cox model with covariates age, residual disease, treatment group, and ECOG performance status gives an adjusted hazard ratio for age. This describes the multiplicative change in survival at any time point. How can this be displayed effectively?</p>
