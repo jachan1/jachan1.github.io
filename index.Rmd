@@ -1,0 +1,194 @@
+---
+title: "James Chan"
+output: 
+  html_document: 
+    css: https://raw.githubusercontent.com/jachan1/rmarkdown_css/master/markdown1.css
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+pckgs <- c("boot", "dplyr", "survival", "nlme", "dplyr", "ggplot2", "tidyr")
+sapply(pckgs, function(pck){
+  if(!suppressWarnings(require(pck, character.only = T))) install.packages(pck)
+  require(pck, character.only = T)
+})
+
+if(!require(repFxns, quietly=T)) devtools::install_github("jachan1/repFxns")
+require(repFxns)
+```
+
+## About Me
+
+Mostly writing [R code](https://github.com/jachan1?tab=repositories) and analyzing data. 
+
+[Linkedin](https://www.linkedin.com/in/james-chan-26826763) always has more work details.
+
+Research projects I've worked on via [NCBI](http://www.ncbi.nlm.nih.gov/sites/myncbi/1TuT66tvRkGAm/bibliography/50039412/public/?sort=date&direction=ascending)
+
+## Quick Look
+
+### Bootstrapping Joint Model
+
+Fitting a linear mixed effects model with vcp as the outcome and time prior to procedure as the only covariate gives useful information about individual estimate for vcp at time of procedure and average change in vcp per month prior to procedure. The random intercept and slope are of most interest here. These random effects can then be used as covariates in a survival post procedure model. This has the benefit of filling in gaps for vcp prior to procedure and also adding in information about the rate of change prior to procedure. These models can be fit separately but then the joint error needs to be estimated. The method shown below uses bootstrapping to calculate non-parametric errors for the effects of interest. 
+
+```{r, echo=T}
+jm_fxn <- function(data, b, formula, covs=NULL, long_ds, var){
+  d = data[b, ]
+  get_coefs <- function(){
+    d$new_id <- sprintf("%0*d", nchar(nrow(d)), 1:nrow(d))
+    ## the long dataset needs to be restricted to subjects bootstrapped. Since the IDs can repeat 
+    tmp_ds <- d %>% select(new_id, subject_id) %>% left_join(long_ds, by="subject_id") %>% select(-subject_id)
+
+    ## mixed model is used to estimate an intercept and slope to use in the final model
+    fm_lms <- stats::formula(sprintf("%s ~ months_bp", var))
+    lms <- lme(fm_lms, random=~months_bp|new_id, correlation = corAR1(), data=tmp_ds)
+    
+    ## this extract estimates
+    ## the fixed effect is added to the random effect for each subject to estimate for each subject
+    lms_summ <- summary(lms)
+    preds_df <- data_frame(new_id=rownames(lms_summ$coefficients$random$new_id),  
+                           int = lms_summ$coefficients$random$new_id[,"(Intercept)"] +
+                             lms_summ$coefficients$fixed["(Intercept)"],
+                           slope=lms_summ$coefficients$random$new_id[,"months_bp"] +
+                             lms_summ$coefficients$fixed["months_bp"])
+    
+    ## the string "int" and "slope" should not be in covs
+    surv_ds <- d[c("new_id", "surv_months", "event", covs)] %>% left_join(preds_df, by="new_id")
+    
+    ## the cox proportional hazard model includes the intercept and slope and any given covariates (cov)
+    sf <- stats::formula(sprintf("Surv(surv_months, event) ~ int + %s", paste0("`", "slope", "`", collapse=" + ")))
+    cph <- coxph(sf, data=surv_ds)
+    scph <- summary(cph)
+    
+    ## the bootstrapped statistic is the estimate
+    outv <- c(scph$coefficients[c("int", "slope"), "exp(coef)"])
+    names(outv) <- paste(var, c("int_unadj", "slope_unadj"), sep="_")
+    outv
+  }
+  tryCatch(get_coefs(), error=function(e) NA)
+}
+
+bt_cox_fxn <- function(x, conf=0.95){
+  df_out <- data.frame(HR=x$t0)
+  df_out$vnames = rownames(df_out)
+  
+  ## standard Error
+  df_out$se <- apply(x$t, 2, sd, na.rm=T)
+  
+  ## P value
+  df_out$p <- sapply(1:ncol(x$t), function(i){
+    sum(sign(x$t0[i])*x$t[,i] > sign(x$t0[i]), na.rm=T)/sum(!is.na(x$t[,i]))
+  })
+  
+  ## Confidence interval
+  df_out[c("Lower 95%", "Upper 95%")] <- t(apply(x$t, 2, function(y){
+    quantile(y, c((1-conf)/2, 1-(1-conf)/2), na.rm=T)
+  }))
+  df_out
+}
+
+### Example Code ---
+## number of bootstraps (low for example. 2000 used for analysis)
+bnum=1000
+
+## creating fake data 
+subs <- sprintf("%03d", 1:100) ## subject ID
+time_pr <- 1:10 ## time before procedure
+
+## vcp_ds is a generated dataset that shows the trajectory of vcp prior to procedure
+vcp_ds <- expand.grid(subject_id=subs, months_bp=time_pr, stringsAsFactors=F) %>% 
+  group_by(subject_id) %>% arrange(-months_bp) %>% 
+  mutate(vcp = runif(1, 80, 100) - seq(runif(1, 0, 10), runif(1, 20, 60), length.out=n()) + runif(n(), -5, 5))
+
+## s_ds is a generated dataset that shows the survival post procedure
+s_ds <- vcp_ds %>% arrange(subject_id, months_bp) %>% filter(row_number() == 1) %>% 
+  mutate(Tlat=-log(runif(n=n())) / (0.01 * exp(rbinom(n(), 1, 0.5)*-0.6)),
+         c=rexp(n(), 0.001), 
+         surv_months = pmin(Tlat, c),
+         event=as.numeric(Tlat <= c))
+
+## running boot function
+bt <- boot(data=s_ds, statistic=jm_fxn, R=bnum, long_ds=vcp_ds, var="vcp")
+```
+
+Resulting effects and confidence intervals below
+
+```{r, results="asis", echo=F}
+bt_cox_fxn(bt) %>% mutate_each(funs(txtRound(., digits=3)), -vnames) %>% mutate(vnames=factor(vnames, levels=c("vcp_int_unadj", "vcp_slope_unadj"), labels=c("VCP Intercept", "VCP Slope"))) %>% TIRC(rnames="vnames")
+```
+
+```{r bootstrap_qs, echo=F, eval=F}
+ggplot(data.frame(est=bt$t[,1]), aes(x=est))+geom_histogram(bins=50) + geom_vline(xintercept=bt$t0[1], color="red")
+
+boot_m <- function(tb){
+  bt <- boot(data=s_ds, statistic=jm_fxn, R=tb$n, long_ds=vcp_ds, var="vcp")
+  bt_cox_fxn(bt)
+}
+
+
+ns <- c(10, 50, 100, 250, 500, 750, 1000)
+tmp <- data_frame(n=ns) %>% group_by(n) %>% do(boot_m(.)) %>% ungroup
+
+ggplot(tmp, aes(x=n, y=HR, color=vnames)) + geom_point(position=position_dodge(width=8)) + geom_errorbar(aes(ymin=`Lower 95%`, ymax=`Upper 95%`), width=8, position=position_dodge(width=8)) + theme_minimal() + scale_x_continuous(breaks = ns)
+```
+
+### Plotting Predicted Survival
+
+```{r, echo=F}
+
+sv <- with(ovarian, Surv(futime, fustat))
+sf1 <- survfit(sv ~ agec, data=ovarian %>% mutate(agec=cut(age, c(0,60, Inf))))
+g1 <- ggsurv(sf1, legend_title = "Age Split") + xlab("Days") + ggtitle("Kaplan Meiers Curves with Age Split")
+cph1 <- coxph(Surv(futime, fustat) ~ age + resid.ds + rx + ecog.ps, data = ovarian) 
+
+cph_tab <- data.frame(summary(cph1)$coefficients)
+cph_tab$rnms <- rownames(cph_tab)
+
+
+alt_sf <- function(sfs){
+  ## input: a list of survfit.cox objects
+  ## output: a survfit.cox object that contains newly estimated survival and has se, lower, and upper set to zero to reflect lack of se
+  out_sf <- sfs[[1]]
+  surv_mat <- do.call("cbind", lapply(sfs, function(s) apply(s$surv, 1, mean)))
+  out_sf$surv <- surv_mat
+  ## need a way to appropriately calculate the SE 
+  surv_mat[] <- 0
+  out_sf$std.err <- surv_mat
+  out_sf$lower = surv_mat
+  surv_mat[] <- 1
+  out_sf$lower = surv_mat
+  out_sf
+}
+
+s_list <- list(base=survfit(cph1, newdata=ovarian),
+               age60=survfit(cph1, newdata=ovarian %>% mutate(age=60)),
+               age70=survfit(cph1, newdata=ovarian %>% mutate(age=70)))
+sf_est <- alt_sf(s_list)
+
+g2 <- ggsurv(sf_est, legend_title = "Age", CI=F, plot.cens=F) + xlab("Days") + ggtitle("Survival Estimates from Adjusted Cox Proportional Hazards Model")
+
+```
+
+A cox model with covariates age, residual disease, treatment group, and ECOG performance status gives an adjusted hazard ratio for age. This describes the multiplicative change in survival at any time point. How can this be displayed effectively?
+
+```{r, echo=F, results="asis"}
+cph_tab %>% mutate(`HR (se)` = sprintf("%1.2f (%1.2f)", exp.coef., se.coef.), p=round(Pr...z.., 2)) %>% select(`HR (se)`, p, rnms) %>% TIRC(rnames="rnms")
+```
+
+<br><br>
+
+One option would be to display the Kaplan Meiers curves with an arbitrary (or clinically defined) dichotomization of age. However, this isn't particularly analogous to the cox model with continuous age and unless the cutoff has a clinical significance the comparison is not very meaningful.
+
+```{r, echo=F}
+g1
+```
+
+Another option would be to estimate the survival curves using the cox model. This can be done in R by providing the original dataset as newdata to the survfit function and only change the age to obtain appropriately adjusted predictions.
+
+```{r, echo=F}
+g2
+```
+
+
